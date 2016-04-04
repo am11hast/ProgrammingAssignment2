@@ -1,0 +1,41 @@
+## These functions take a matrix and solve for the inverse of the 
+##original matrix.
+
+## Write a short comment describing this function
+##This function creates and sets the values in the matrix. It also sets
+##the values for the inverse of the function. 
+
+makeCacheMatrix <- function(x = matrix()) {
+  t <- NULL
+  set <- function(y) {
+    x <<- y
+    t <<- NULL
+  }
+  get <- function() x
+  setInverse <- function(inv) t <<- inv
+  getInverse <- function() t
+  list(
+    set = set,
+    get = get,
+    setInverse = setInverse,
+    getInverse = getInverse
+  )
+
+}
+
+
+
+
+## Returns the inverse of the matrix
+
+cacheSolve <- function(x, ...) {
+  t <- x$getInverse()
+  if(!is.null(t)) {
+    message("Getting Data")
+    return(t)
+  }
+  v <- x$get()
+  t <- solve(v, ...)
+  x$setInverse(t)
+  t
+}
